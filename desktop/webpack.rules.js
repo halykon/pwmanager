@@ -26,4 +26,22 @@ module.exports = [
       },
     },
   },
+  {
+    test: /\.[jt]sx?$/,
+    include: /tamagui/,
+    use: [
+      'thread-loader',
+      'esbuild-loader',
+      {
+        loader: 'tamagui-loader',
+        options: {
+          config: './tamagui.config.ts',
+          components: ['tamagui'],
+          importsWhitelist: ['constants.js', 'colors.js'],
+          logTimings: true,
+          disableExtraction: process.env.NODE_ENV === 'development',
+        },
+      },
+    ]
+  }
 ];
